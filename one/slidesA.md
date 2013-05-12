@@ -5,7 +5,7 @@
 ## @rsslldnphy ##
 
 <!SLIDE>
-## Who am I? ##
+# Who am I? #
 Russell Dunphy - Ruby developer at On the Beach
 
 (on the internet I drop those cumbersome vowels, and go by @rsslldnphy)
@@ -26,20 +26,56 @@ Russell Dunphy - Ruby developer at On the Beach
   * count that number back to 1965
 
 <!SLIDE bullets incremental>
-# Third Slide
+# Nil is not a null reference #
+* In Ruby, everything is an object
+* (almost)
+* This includes `nil`
+* the only instance of `NilClass`
 
-* Sometimes bullet items
-  * Have sublists
-  * And some sublist items
-    * Have some of their own
-    * And so on
-* But top-level "bullet items" have no bullets
-  * isn't that odd?
+<!SLIDE>
+# This in an improvement! #
 
-Also, sometimes you just want to have plain text sitting in the middle
-of the screen. The quick brown fox jumps over the lazy dog.
+<!SLIDE bullets incremental>
+# `nil` v `null`
 
-!SLIDE center transition=scrollUp
-.notes another dark side
+* `nil` is better!
 
-![octocat](octocat.png)
+  * Calling any method on a Java `null` => `NullPointerException`
+  * `NilClass` defines some handy methods (mainly for working out if it's `nil` or not)
+
+* But it's still rubbish!
+
+<!SLIDE>
+# Why is `nil` so rubbish then? #
+
+So far I've just taken it for granted that `nil` is a bad thing
+
+But there are very good reasons for this
+
+<!SLIDE bullets incremental>
+# The two types of `nil`#
+
+* Type One - nil as bug
+
+  * Something has gone wrong in your program
+  * Something you expect to have a value doesn't
+  * You want to crash as soon as possible!
+
+* Type Two - nil as absence
+
+  * The 'empty' state of a value that may not be set
+  * eg. a `Person` may or may not be wearing a `Hat`.
+  * This is a perfectly valid state for your program
+
+
+<!SLIDE>
+# It's actually even worse... #
+
+<!SLIDE bullets incremental>
+
+# Are these type one or type two `nils`? #
+
+* `{}[:foo]          #=> nil`
+* `@blahblahblah     #=> nil`
+
+<!SLIDE bullets incremental>
