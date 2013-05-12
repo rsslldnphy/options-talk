@@ -1,0 +1,15 @@
+{
+  "name": "Nils - what are your Options?",
+  "description": "There are nils and there are nils. You don't need either.",
+  "author": "Russell Dunphy",
+  "templates" : {
+      "special" : "simple.tpl"
+  },
+  "pause_msg": "Paused !!!",
+  "sections": [
+    {"section":"one"},
+    {"section":"two"},
+    {"section":"three"},
+    {"section":"four"}
+  ]
+}

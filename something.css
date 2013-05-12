@@ -1,0 +1,13 @@
+/* custom css and js files included at the top level of your presentation will
+ * will be included in your presentation */
+
+body {
+  font-family: 'Gill Sans', sans-serif;
+}
+.title-slide h1 {
+  color: blue;
+}
+
+.bullets p {
+  text-align: left;
+}
