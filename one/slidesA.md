@@ -33,7 +33,7 @@ Russell Dunphy - Ruby developer at On the Beach
 * the only instance of `NilClass`
 
 <!SLIDE>
-# This in an improvement! #
+# This is an improvement! #
 
 <!SLIDE bullets incremental>
 # `nil` v `null`
@@ -41,7 +41,8 @@ Russell Dunphy - Ruby developer at On the Beach
 * `nil` is better!
 
   * Calling any method on a Java `null` => `NullPointerException`
-  * `NilClass` defines some handy methods (mainly for working out if it's `nil` or not)
+  * `NilClass` defines some handy methods
+  * (mainly for working out if it's `nil` or not)
 
 * But it's still rubbish!
 
@@ -50,7 +51,7 @@ Russell Dunphy - Ruby developer at On the Beach
 
 So far I've just taken it for granted that `nil` is a bad thing
 
-But there are very good reasons for this
+But there are very good reasons for saying this
 
 <!SLIDE bullets incremental>
 # The two types of `nil`#
@@ -78,4 +79,50 @@ But there are very good reasons for this
 * `{}[:foo]          #=> nil`
 * `@blahblahblah     #=> nil`
 
+<!SLIDE>
+# Where do type one (buggy nils) come from?
+
+<!SLIDE subsection>
+## There's only one place they *can* come from ##
+
+<!SLIDE>
+
+## And that is... ##
+## type two nils that have escaped ##
+
+
+<!SLIDE incremental>
+# How type two nils escape #
+
+## Using `nil` leads to lots of defensive coding
+
+    @@@ ruby
+    unless current_user.nil?
+      puts current_user.name
+    end
+
+
 <!SLIDE bullets incremental>
+# Defensive coding is...
+* ugly!
+* easy to forget to do
+* ...and that's how type two nils escape
+
+<!SLIDE incremental>
+# and the worst bit...#
+## is that the escaped nil might not blow up straight away... ##
+### so finding the cause of the bug can be hard ###
+(and I don't like it when fixing bugs is hard)
+
+<!SLIDE>
+# But it doesn't have to be this way! #
+
+<!SLIDE>
+# It turns out there are better ways to represent 'absence' #
+
+
+<!SLIDE bullets incremental>
+# Option types #
+* Found in many functional languages, such as ML, F# and Scala
+* Incredibly simple, surprisingly powerful
+* (and I've written a Ruby implementation if you want to use it)
