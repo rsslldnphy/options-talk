@@ -126,3 +126,110 @@ But there are very good reasons for saying this
 * Found in many functional languages, such as ML, F# and Scala
 * Incredibly simple, surprisingly powerful
 * (and I've written a Ruby implementation if you want to use it)
+
+
+<!SLIDE bullets incremental>
+# What is an Option?
+* It's a container
+* It either has a value in it, or it doesn't
+* And that's it
+
+<!SLIDE>
+## Let's look at some code (finally!) ##
+
+    @@@ ruby
+    # constructing an 'optional hat'
+
+    optional_hat = Some[:fedora]
+
+    # and the absence of an optional hat
+
+    optional_hat = None
+
+<!SLIDE bullets incremental>
+# Using the value of an option
+
+* You can't just use an option as a value
+* You have to retrieve its value first
+* (And this is a good thing)
+
+<!SLIDE bullets incremental>
+# Getting the value of an option
+
+    @@@ ruby
+    # the simplest way to get an option value
+
+    Some[:fedora].value # => :fedora
+
+    # will raise an error if there isn't one
+
+    None.value # => raises ValueOfNoneError
+
+<!SLIDE bullets incremental>
+# Making sure an option has a value
+
+    @@@ ruby
+    if optional_hat.some?
+      puts "Wearing a #{optional_hat.value}"
+    elsif optional_hat.none?
+      puts "Not wearing a hat"
+    end
+
+(this looks a bit like that ugly defensive coding though, doesn't it...?)
+
+<!SLIDE bullets incremental>
+# Providing a default value
+
+    @@@ ruby
+    # sometimes there's an easy default
+
+    hat_desc = optional_hat.value_or "no hat"
+
+    # but sometimes it might not be so easy
+
+    puts "They are wearing a #{hat_desc}"
+
+    # => "They are wearing a no hat"
+
+<!SLIDE bullets incremental>
+# Options are containers, remember!
+* That means they implement `Enumerable`
+* This leads to loads of cool stuff
+
+<!SLIDE bullets incremental>
+# Option#map
+
+    @@@ ruby
+    optional_hat.map do |hat|
+      "It's a #{hat}!"
+    end
+
+    # Some[:fedora] => Some["It's a fedora!"]
+    # None          => None
+
+<!SLIDE bullets incremental>
+# Option#each #
+
+    @@@ ruby
+    optional_hat.each do |hat|
+      puts "* doffs #{hat} *"
+    end
+
+<!SLIDE bullets incremental>
+## This also works in Rails views... ##
+
+    @@@ ruby
+    <%= render 'hat',
+          collection: @optional_hat %>
+
+<!SLIDE bullets incremental>
+# Option#flatten
+
+    @@@ ruby
+    [
+      Some[:fedora],
+      None,
+      Some[:trilby],
+      Some[:woolly],
+      None
+    ].flatten # => [:fedora, :trilby, :woolly]
