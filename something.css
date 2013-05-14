@@ -15,4 +15,16 @@ body {
 pre code {
   margin-left: auto;
   margin-right: auto;
+  font-size: 32px;
+}
+h1 code {
+  font-size: 48px;
+}
+code, pre.sh_sourceCode .sh_string {
+  font-family: monaco;
+  font-size: 32px;
+}
+
+.smaller-code code, .smaller-code pre.sh_sourceCode .sh_string {
+  font-size: 28px;
 }

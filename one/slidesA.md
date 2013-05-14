@@ -97,8 +97,8 @@ But there are very good reasons for saying this
 ## Using `nil` leads to lots of defensive coding
 
     @@@ ruby
-    unless current_user.nil?
-      puts current_user.name
+    if !current_user.nil? && !current_user.hat.nil?
+      puts "They are wearing a #{current_user.hat}"
     end
 
 
@@ -216,7 +216,7 @@ But there are very good reasons for saying this
     end
 
 <!SLIDE bullets incremental>
-## This also works in Rails views... ##
+## This can be useful in ERB... ##
 
     @@@ ruby
     <%= render 'hat',
@@ -233,3 +233,153 @@ But there are very good reasons for saying this
       Some[:woolly],
       None
     ].flatten # => [:fedora, :trilby, :woolly]
+
+<!SLIDE>
+
+# Next: Pattern Matching
+## But before we move on - any questions?
+
+<!SLIDE bullets incremental>
+# What is 'pattern matching'?
+* Common in functional languages
+* Usually how they interact with Options
+* Asserts on value & extracts data from it
+
+<!SLIDE>
+# An example of pattern matching
+
+    @@@ ruby
+    optional_hat.match do |m|
+      m.some { |hat| puts "Wearing a #{hat}" }
+      m.none {       puts "No hat here"      }
+    end
+
+<!SLIDE>
+# You can also assert on content
+
+    @@@ ruby
+    optional_hat.match do |m|
+      m.some(:fez)    { puts "Bowties are cool!" }
+      m.some(:bowler) { puts "Tea, anyone?"      }
+      m.none          { puts "No hat here"       }
+    end
+
+<!SLIDE bullets>
+# Pattern matching in FP
+* Tends to be used a lot
+* Can extract from arrays & hashes
+* Is even used for method dispatch!
+
+<!SLIDE>
+# Pattern matching for method dispatch
+In ML, methods only ever have 1 arg
+'Multi-argument' methods are actually pattern matches over tuples
+
+    @@@ sml
+    fun add (x, y) = x + y
+
+<!SLIDE>
+## You can usually define multiple versions of a function with different patterns
+    @@@ sml
+    fun add (x, y) = x + y
+
+      | add (x, y, z) = x + y + z
+
+Clojure does something similar with multimethods
+
+<!SLIDE>
+## In some languages such as Erlang, you can even add guard clauses!
+
+    @@@ erlang
+    safe_divide(X, Y) when Y == 0 -> 0;
+
+    safe_divide(X, Y) -> X / Y.
+
+<!SLIDE>
+# Wouldn't it be cool if you could do this in Ruby....??
+
+<!SLIDE>
+# Well...
+
+<!SLIDE>
+# Introducing Quincunx
+* Attempt to bring Erlang style pattern matching to Ruby
+* Multiple dispatch
+* Guard clauses
+* Not recommended for production use!
+
+<!SLIDE>
+# Quincunx - an example
+
+## Let's say we have the following classes / structs
+
+    @@@ ruby
+    class Drink; end
+    class SoftDrink < Drink; end
+    class AlcoholicDrink < Drink; end
+
+    class Lemonade < SoftDrink; end
+    class WhiskeySour < AlcoholicDrink; end
+
+    Person = Struct.new(:name, :age)
+
+<!SLIDE smaller-code>
+# Quincunx - an example
+
+## Now let's define a `Bar`:
+
+    @@@ ruby
+    class Bar
+      include Quincunx
+
+      # anyone can order a soft drink
+      define :serve, [Person, keys: [:name]], SoftDrink do
+        "A soft drink? No problem, #{name}"
+      end
+
+<!SLIDE smaller-code>
+# Quincunx - an example
+
+What if someone shouldn't be allowed to buy alcohol?
+
+    @@@ ruby
+    define :serve,
+      [Person, keys: [:name, :age]],
+      AlcoholicDrink,
+      when: ->{ age < 18 } do
+
+      "No chance, #{name}, you're only #{age}!"
+    end
+
+<!SLIDE smaller-code>
+# Quincunx - an example
+
+But of course, if you're old enough, that's fine
+
+    @@@ ruby
+    define :serve,
+      [Person, keys: [:name, :age]],
+      [Alcopop, as: :drink],
+      when: -> { age >= 18 } do
+
+      "Here you go, #{name}, here's your #{drink.class}"
+    end
+
+<!SLIDE>
+# Recap!
+* nils are a bad way to represent absence
+* options are *good* way to represent absence
+* pattern matching is cool
+* it would be awesome if Ruby had it (properly)
+
+<!SLIDE>
+# Code!
+* Optional - http://github.com/rsslldnphy/optional
+* Quincunx - http://github.com/rsslldnphy/quincunx
+* Id - http://github.com/onthebeach/id
+
+<!SLIDE>
+# Thanks for listening!
+## Find me on twitter: @rsslldnphy
+
+## Oh - and we're hiring at On the Beach!
