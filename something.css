@@ -4,8 +4,13 @@
 body {
   font-family: 'Gill Sans', sans-serif;
 }
-.title-slide h1 {
-  color: blue;
+
+.slide {
+  background: url('old_wall.png') repeat;
+}
+
+.title-slide h2 {
+  color: darkblue;
 }
 
 .bullets p {

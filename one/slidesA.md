@@ -379,7 +379,7 @@ But of course, if you're old enough, that's fine
 * Id - http://github.com/onthebeach/id
 
 <!SLIDE>
-# Thanks for listening!
+# Thanks for listening
 ## Find me on twitter: @rsslldnphy
 
 ## Oh - and we're hiring at On the Beach!
