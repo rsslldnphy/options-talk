@@ -6,9 +6,10 @@
 
 <!SLIDE>
 # Who am I? #
-Russell Dunphy - Ruby developer at On the Beach
+## Russell Dunphy
+## Ruby developer at On the Beach
 
-(on the internet I drop those cumbersome vowels, and go by @rsslldnphy)
+### (on the internet I drop those cumbersome vowels, and go by @rsslldnphy)
 
 <!SLIDE>
 # So, nils? What's the story?
@@ -25,17 +26,17 @@ Russell Dunphy - Ruby developer at On the Beach
   * multiply that by all the programmers in the world
   * count that number back to 1965
 
-<!SLIDE bullets incremental>
+<!SLIDE bullets>
 # Nil is not a null reference #
 * In Ruby, everything is an object
 * (almost)
 * This includes `nil`
-* the only instance of `NilClass`
+* (the only instance of `NilClass`)
 
 <!SLIDE>
 # This is an improvement! #
 
-<!SLIDE bullets incremental>
+<!SLIDE bullets >
 # `nil` v `null`
 
 * `nil` is better!
@@ -72,7 +73,7 @@ But there are very good reasons for saying this
 <!SLIDE>
 # It's actually even worse... #
 
-<!SLIDE bullets incremental>
+<!SLIDE bullets>
 
 # Are these type one or type two `nils`? #
 
@@ -121,14 +122,14 @@ But there are very good reasons for saying this
 # It turns out there are better ways to represent 'absence' #
 
 
-<!SLIDE bullets incremental>
+<!SLIDE bullets>
 # Option types #
 * Found in many functional languages, such as ML, F# and Scala
 * Incredibly simple, surprisingly powerful
 * (and I've written a Ruby implementation if you want to use it)
 
 
-<!SLIDE bullets incremental>
+<!SLIDE bullets>
 # What is an Option?
 * It's a container
 * It either has a value in it, or it doesn't
@@ -146,7 +147,7 @@ But there are very good reasons for saying this
 
     optional_hat = None
 
-<!SLIDE bullets incremental>
+<!SLIDE bullets>
 # Using the value of an option
 
 * You can't just use an option as a value
@@ -191,7 +192,7 @@ But there are very good reasons for saying this
 
     # => "They are wearing a no hat"
 
-<!SLIDE bullets incremental>
+<!SLIDE bullets>
 # Options are containers, remember!
 * That means they implement `Enumerable`
 * This leads to loads of cool stuff
@@ -208,21 +209,6 @@ But there are very good reasons for saying this
     # None          => None
 
 <!SLIDE bullets incremental>
-# Option#each #
-
-    @@@ ruby
-    optional_hat.each do |hat|
-      puts "* doffs #{hat} *"
-    end
-
-<!SLIDE bullets incremental>
-## This can be useful in ERB... ##
-
-    @@@ ruby
-    <%= render 'hat',
-          collection: @optional_hat %>
-
-<!SLIDE bullets incremental>
 # Option#flatten
 
     @@@ ruby
@@ -234,12 +220,27 @@ But there are very good reasons for saying this
       None
     ].flatten # => [:fedora, :trilby, :woolly]
 
+<!SLIDE bullets incremental>
+# Option#each #
+
+    @@@ ruby
+    optional_hat.each do |hat|
+      puts "* doffs #{hat} *"
+    end
+
+<!SLIDE bullets incremental>
+## This can be useful in ERB... ##
+
+    @@@ ruby
+    <%= render 'hat', collection: @optional_hat %>
+
+
 <!SLIDE>
 
 # Next: Pattern Matching
 ## But before we move on - any questions?
 
-<!SLIDE bullets incremental>
+<!SLIDE bullets>
 # What is 'pattern matching'?
 * Common in functional languages
 * Usually how they interact with Options
@@ -273,6 +274,7 @@ But there are very good reasons for saying this
 <!SLIDE>
 # Pattern matching for method dispatch
 In ML, methods only ever have 1 arg
+
 'Multi-argument' methods are actually pattern matches over tuples
 
     @@@ sml
@@ -285,7 +287,7 @@ In ML, methods only ever have 1 arg
 
       | add (x, y, z) = x + y + z
 
-Clojure does something similar with multimethods
+(Clojure does something similar with multimethods)
 
 <!SLIDE>
 ## In some languages such as Erlang, you can even add guard clauses!
@@ -379,7 +381,10 @@ But of course, if you're old enough, that's fine
 * Id - http://github.com/onthebeach/id
 
 <!SLIDE>
-# Thanks for listening
+# Thanks for listening!
 ## Find me on twitter: @rsslldnphy
 
-## Oh - and we're hiring at On the Beach!
+<!SLIDE>
+## and...
+# On the Beach is hiring
+## come say hello in the pub!
